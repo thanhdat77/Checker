@@ -10,7 +10,7 @@ class Piece:
         self.row = row
         self.col = col
         self.color = color
-        self.king = True
+        self.king = False
         self.x = 0
         self.y = 0
         self.calc_pos()
@@ -27,12 +27,12 @@ class Piece:
         pygame.draw.circle(win, GREY, (self.x, self.y), radius + self.OUTLINE)
         pygame.draw.circle(win, self.color, (self.x, self.y), radius)
         if self.king:
-            win.draw.filled_circle(
-                (self.x * SQUARE_SIZE, self.y * SQUARE_SIZE),
-                GREY,
-                radius + self.OUTLINE,
-            )
-
+            # win.draw.filled_circle(
+            #     (self.x * SQUARE_SIZE, self.y * SQUARE_SIZE),
+            #     GREY,
+            #     radius + self.OUTLINE,
+            # )
+            pass
     def move(self, row, col):
         self.row = row
         self.col = col
