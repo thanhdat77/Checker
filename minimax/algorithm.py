@@ -11,7 +11,7 @@ def minimax(position, depth, max_player, game):
         maxEval = float("-inf")
         best_move = None
         for move in get_all_moves(position, WHITE, game):
-            evaluation = minimax(move, depth - 1, True, game)
+            evaluation = minimax(move, depth - 1, False, game)[0]
             maxEval = max(evaluation, maxEval)
             if maxEval == evaluation:
                 best_move = move
@@ -21,7 +21,7 @@ def minimax(position, depth, max_player, game):
         minEval = float("inf")
         worse_move = None
         for move in get_all_moves(position, RED, game):
-            evaluation = minimax(move, depth - 1, False, game)
+            evaluation = minimax(move, depth - 1, True, game)[0]
             minEval = min(evaluation, minEval)
             if minEval == evaluation:
                 worse_move = move
@@ -29,7 +29,6 @@ def minimax(position, depth, max_player, game):
 
 
 def simulate_move(temp_board, temp_piece, move, skip):
-    print(move[0].value(), move[1])
     temp_board.move(temp_piece, move[0], move[1])
     if skip:
         temp_board.remove(skip)
@@ -40,7 +39,7 @@ def get_all_moves(board, color, game):
     moves = []
     for piece in board.get_all_pieces(color):
         valid_moves = board.get_valid_moves(piece)
-        for move, skip in valid_moves:
+        for move, skip in valid_moves.items():
             temp_board = deepcopy(board)
             temp_piece = temp_board.get_piece(piece.row, piece.col)
             new_board = simulate_move(temp_board, temp_piece, move, skip)

@@ -184,9 +184,9 @@ class Board:
     # add some def for AI to work
     def evaluate(self):
         return (
-            self.red_left
-            + self.white_left
-            + (self.white_kings * 0, 5 - self.red_kings * 0, 5)
+            self.white_left
+            - self.red_left
+            + (self.white_kings * 0.5 - self.red_kings * 0.5)
         )
 
     def get_all_pieces(self, color):
